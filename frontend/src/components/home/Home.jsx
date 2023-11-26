@@ -12,12 +12,12 @@ const Home = () => {
   let navigate = useNavigate()
   let location = useLocation()
 
+
   useEffect(() => {
     let apiGetPostDatas = async () => {
       let datas = await axios.get("http://localhost:8080/post");
       setPostDatas(datas.data.datas);
       setTxtComment(datas.data.datas.map(dt => ({postID : dt.id, value : ""})))
-      console.log(datas.data.datas);
     };
     apiGetPostDatas();
   }, []);
@@ -34,7 +34,7 @@ const Home = () => {
     let datas = await axios.post(`http://localhost:8080/post-comment/${post.id}`,{
       id : dataID.data + 1,
       title : txtComment.find(dt => dt.postID === post.id).value.split(":")[0],
-      user : post.author,
+      user : location.state.user,
       published : true,
       content : txtComment.find(dt => dt.postID === post.id).value.split(":")[1]
     });
@@ -104,7 +104,7 @@ const Home = () => {
                 {postComments.length > 0
                   ? postComments[0].postID === post.id
                     ? postComments.map((cmt) => (
-                        <Comment key={cmt.id} cmt={cmt} viewID={cmt.id}/>
+                        <Comment key={cmt.id} cmt={cmt} viewID={cmt.id} user={location.state.user}/>
                       ))
                     : null
                   : null}

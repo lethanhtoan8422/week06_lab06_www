@@ -13,10 +13,6 @@ const Post = () => {
   let navigate = useNavigate();
   let location = useLocation();
 
-  useEffect(() => {
-    console.log(location.state.user);
-  }, []);
-
   let handleClickBtnPost = async() => {
     let dataID = await axios.get("http://localhost:8080/post/current-post-id");
     let datas = await axios.post("http://localhost:8080/post",{

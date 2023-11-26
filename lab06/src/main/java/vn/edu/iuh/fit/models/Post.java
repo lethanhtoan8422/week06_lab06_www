@@ -8,6 +8,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -45,13 +46,13 @@ public class Post {
     private Boolean published = false;
 
     @Column(name = "createdAt", nullable = false)
-    private Instant createdAt;
+    private LocalDateTime createdAt;
 
     @Column(name = "updatedAt")
-    private Instant updatedAt;
+    private LocalDateTime updatedAt;
 
     @Column(name = "publishedAt")
-    private Instant publishedAt;
+    private LocalDateTime publishedAt;
 
     @Lob
     @Column(name = "content", columnDefinition = "text")
@@ -65,7 +66,7 @@ public class Post {
     @JsonIgnore
     private Set<PostComment> postComments = new LinkedHashSet<>();
 
-    public Post(User author, Post parent, String title, String metaTitle, String summary, Boolean published, Instant createdAt, Instant updatedAt, Instant publishedAt, String content) {
+    public Post(User author, Post parent, String title, String metaTitle, String summary, Boolean published, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime publishedAt, String content) {
         this.author = author;
         this.parent = parent;
         this.title = title;

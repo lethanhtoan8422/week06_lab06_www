@@ -9,6 +9,8 @@ import vn.edu.iuh.fit.response.ResponseObject;
 import vn.edu.iuh.fit.services.PostService;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 @RestController
 @RequestMapping("/post")
@@ -31,9 +33,9 @@ public class PostController {
 
     @PostMapping
     public Post createPost(@RequestBody Post post){
-        post.setCreatedAt(Instant.now());
-        post.setUpdatedAt(Instant.now());
-        post.setPublishedAt(Instant.now());
+        post.setCreatedAt(LocalDateTime.now());
+        post.setUpdatedAt(LocalDateTime.now());
+        post.setPublishedAt(LocalDateTime.now());
         return postService.createPost(post).orElse(null);
     }
 }

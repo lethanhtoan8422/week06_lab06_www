@@ -1,5 +1,7 @@
 package vn.edu.iuh.fit.response;
 
+import vn.edu.iuh.fit.models.Post;
+
 public class ResponseObject {
     private String status;
     private String message;

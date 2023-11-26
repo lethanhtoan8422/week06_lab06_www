@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 
-const Comment = ({ cmt, viewID }) => {
+const Comment = ({ cmt, viewID, user }) => {
   const [data, setData] = useState([]);
   const [viewReply, setViewReply] = useState(viewID);
   const [showInputComment, setShowInputComment] = useState({
@@ -22,12 +22,11 @@ const Comment = ({ cmt, viewID }) => {
   };
 
   let handleClickSend = async(cmt) => {
-    console.log(cmt);
     let dataID = await axios.get("http://localhost:8080/post-comment/current-post-comment-id")
     let datas = await axios.post(`http://localhost:8080/post-comment/${cmt.postID}/${cmt.id}`,{
       id : dataID.data + 1,
       title : txtComment.split(":")[0],
-      user : cmt.user,
+      user : user,
       published : true,
       content : txtComment.split(":")[1]
     });
@@ -75,7 +74,7 @@ const Comment = ({ cmt, viewID }) => {
       ) : null}
       <div style={{ marginLeft: "45px" }}>
         {data.map((dt) => (
-          <Comment key={dt.id} cmt={dt} viewID={dt.id} />
+          <Comment key={dt.id} cmt={dt} viewID={dt.id} user={user}/>
         ))}
       </div>
     </div>
